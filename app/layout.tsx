@@ -9,7 +9,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Life OS Generator",
-  description: "生年月日と人相から、最適なメンタルモデルを適用した人生戦略を導き出します。",
+  description: "顔写真×生年月日から、あなたの「勝ちパターン」をAIが構造化。努力を成果に直結させるための、具体的なネクストアクションを導き出します。",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({

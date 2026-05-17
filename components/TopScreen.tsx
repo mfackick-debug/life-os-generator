@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 interface TopScreenProps {
   onStart: () => void;
 }
@@ -8,6 +10,16 @@ export default function TopScreen({ onStart }: TopScreenProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 text-center">
       <div className="max-w-2xl mx-auto space-y-8 animate-fade-in-up">
+        <div className="flex justify-center">
+          <Image
+            src="/logo.png"
+            alt="Life OS Generator"
+            width={100}
+            height={100}
+            className="object-contain"
+            priority
+          />
+        </div>
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground">
           Life OS Generator
         </h1>
