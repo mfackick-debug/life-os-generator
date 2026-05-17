@@ -1,0 +1,101 @@
+import { NextRequest, NextResponse } from "next/server";
+import OpenAI from "openai";
+
+// DeepSeek API クライアントの初期化（OpenAI SDK互換）
+const client = new OpenAI({
+  apiKey: process.env.DEEPSEEK_API_KEY ?? "",
+  baseURL: "https://api.deepseek.com/v1",
+});
+
+export async function POST(request: NextRequest) {
+  try {
+    // 1. フロントエンドからデータを受け取る
+    const body = await request.json();
+    const { name, dob, gender, faceAnswers } = body;
+
+    // バリデーション
+    if (!name || !dob || !gender || !faceAnswers) {
+      return NextResponse.json(
+        { error: "必須パラメータが不足しています (name, dob, gender, faceAnswers)" },
+        { status: 400 }
+      );
+    }
+
+    // 2. User プロンプトの構築
+    const userPrompt = buildUserPrompt({ name, dob, gender, faceAnswers });
+
+    // 3. DeepSeek API を呼び出す
+    const completion = await client.chat.completions.create({
+      model: "deepseek-chat",
+      messages: [
+        {
+          role: "system",
+          content:
+            "あなたは入力された命理データ（生年月日・姓名）と人相（輪郭・目元）の傾向から、最適なメンタルモデルを適用した人生戦略（Life OS）を出力するAI戦略家です。占いや断定的な予言は避け、事実と論理に基づく戦略的シミュレーションとしてMarkdown形式で出力してください。",
+        },
+        {
+          role: "user",
+          content: userPrompt,
+        },
+      ],
+      temperature: 0.7,
+      max_tokens: 4096,
+    });
+
+    // 4. 結果を返す
+    const resultText =
+      completion.choices[0]?.message?.content ??
+      "結果を生成できませんでした。";
+
+    return NextResponse.json({ result: resultText });
+  } catch (error: unknown) {
+    console.error("API Error:", error);
+
+    const message =
+      error instanceof Error ? error.message : "不明なエラーが発生しました";
+
+    return NextResponse.json(
+      { error: `DeepSeek API 呼び出し中にエラーが発生しました: ${message}` },
+      { status: 500 }
+    );
+  }
+}
+
+/**
+ * フロントエンドから受け取ったデータを整形し、User プロンプト文字列を生成する
+ */
+function buildUserPrompt(data: {
+  name: string;
+  dob: string;
+  gender: string;
+  faceAnswers: Record<string, string>;
+}): string {
+  const { name, dob, gender, faceAnswers } = data;
+
+  const faceSummary = Object.entries(faceAnswers)
+    .map(([key, value]) => {
+      const questionMap: Record<string, string> = {
+        q1: "輪郭",
+        q2: "目元",
+      };
+      const label = questionMap[key] ?? key;
+      return `  - ${label}: ${value}`;
+    })
+    .join("\n");
+
+  return `以下の命理データと人相（輪郭・目元）の傾向に基づいて、最適なメンタルモデルを適用した人生戦略（Life OS）を生成してください。
+
+## 基本情報
+- 姓名: ${name}
+- 生年月日: ${dob}
+- 性別: ${gender}
+
+## 人相の傾向
+${faceSummary}
+
+## 出力形式
+Markdown形式で、以下のセクションを含めて出力してください。
+1. 総合診断（タイプ名と簡潔な説明）
+2. 推奨されるメンタルモデル（3つ程度、各モデルの説明付き）
+3. 行動戦略（具体的なネクストアクション）`;
+}

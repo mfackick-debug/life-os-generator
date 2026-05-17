@@ -1,0 +1,47 @@
+"use client";
+
+interface TopScreenProps {
+  onStart: () => void;
+}
+
+export default function TopScreen({ onStart }: TopScreenProps) {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 text-center">
+      <div className="max-w-2xl mx-auto space-y-8 animate-fade-in-up">
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground">
+          The Architecture of Destiny
+          <span className="block mt-2 text-accent-600 dark:text-accent-500 text-2xl md:text-4xl font-semibold">
+            Life OS Generator
+          </span>
+        </h1>
+        
+        <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-xl mx-auto leading-relaxed">
+          生年月日と人相から、最適なメンタルモデルを適用した人生戦略を導き出します。
+        </p>
+
+        <div className="pt-8">
+          <button
+            onClick={onStart}
+            className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-foreground dark:bg-white dark:text-foreground border border-transparent rounded-full shadow-sm hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-foreground"
+          >
+            診断を開始する
+            <svg
+              className="w-5 h-5 ml-3 transition-transform duration-200 group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
