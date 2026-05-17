@@ -40,6 +40,9 @@ export default function TopScreen({ onStart }: TopScreenProps) {
               />
             </svg>
           </button>
+          <p className="mt-4 text-xs text-gray-500 dark:text-gray-400">
+            ※入力された生年月日や画像データは、AIによる解析にのみ一時的に使用され、サーバーやデータベースには一切保存されません。
+          </p>
         </div>
       </div>
     </div>

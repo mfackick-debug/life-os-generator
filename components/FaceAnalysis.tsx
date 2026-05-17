@@ -199,6 +199,9 @@ export default function FaceAnalysis({ onAnalysisComplete }: FaceAnalysisProps) 
 
         {/* 操作ボタン */}
         <div className="space-y-3">
+          <p className="text-xs text-gray-500 dark:text-gray-400 text-center -mt-2 mb-2">
+            ※アップロードされた写真は解析直後に完全に破棄され、保存されません。
+          </p>
           {/* アップロード */}
           <button
             onClick={handleUploadClick}
