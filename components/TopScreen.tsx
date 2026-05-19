@@ -20,15 +20,15 @@ export default function TopScreen({ onStart }: TopScreenProps) {
             priority
           />
         </div>
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground">
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">
           Life OS Generator
         </h1>
         
-        <p className="text-lg md:text-xl text-accent-600 dark:text-accent-500 font-semibold mt-2">
+        <p className="text-lg md:text-xl text-blue-300 font-semibold mt-2">
           あなた専用の意思決定戦略AI
         </p>
         
-        <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-xl mx-auto leading-relaxed">
+        <p className="text-lg md:text-xl text-blue-100/80 max-w-xl mx-auto leading-relaxed">
           顔写真×生年月日から、あなたの"勝ちパターン"をAIが構造化。努力を成果に直結させるための、具体的なネクストアクションを導き出します。
         </p>
 

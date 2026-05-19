@@ -1,10 +1,9 @@
-# Task Progress: 手相→人相への変更
+# Task Progress
 
-- [x] Analyze existing codebase
-- [ ] Create FaceAnalysis component (camera/upload + dummy analysis)
-- [ ] Update QuestionScreen to support hybrid UI (preselected answers)
-- [ ] Update page.tsx: change steps, questions, flow logic
-- [ ] Update TopScreen description text
-- [ ] Update app/api/generate/route.ts: prompt and parameter names
-- [ ] Update layout.tsx metadata description
-- [ ] Verify all changes work together
+- [x] Analyze current codebase
+- [x] Update TopScreen.tsx text colors for dark background contrast
+- [x] Update page.tsx container/header/footer for dark background
+- [x] Update layout.tsx body classes
+- [x] Update globals.css background overlay
+- [x] Verify with `npm run dev` (200 OK)
+- [ ] Git commit and push to Vercel
