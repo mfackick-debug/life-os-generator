@@ -138,15 +138,20 @@ export default function Home() {
         <header className="py-6 px-8 border-b border-slate-200 sticky top-0 z-10 bg-white/80 backdrop-blur-md">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="text-xl font-bold tracking-tight flex items-center gap-2 text-slate-900">
-              <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-slate-200 shadow-sm bg-slate-900 p-1">
-                <Image
-                  src="/images/publiclogo.png"
-                  alt="Developer"
-                  width={32}
-                  height={32}
-                  className="w-full h-full object-cover"
+              <svg
+                className="w-7 h-7 text-blue-500"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
                 />
-              </div>
+              </svg>
               Life OS
             </div>
             <div className="text-sm font-medium text-slate-500">
