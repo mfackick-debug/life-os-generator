@@ -12,7 +12,7 @@ export default function TopScreen({ onStart }: TopScreenProps) {
       <div className="max-w-2xl mx-auto space-y-8 animate-fade-in-up">
         {/* 幾何学模様のサイバーロゴ（円形・小さめ） */}
         <div className="flex justify-center">
-          <div className="w-16 h-16 rounded-full overflow-hidden shadow-sm ring-2 ring-slate-200 bg-slate-900">
+          <div className="w-16 h-16 rounded-full overflow-hidden shadow-sm ring-2 ring-slate-200 bg-slate-900 p-2">
             <Image
               src="/images/publicbg.png"
               alt="Life OS Logo"

@@ -138,7 +138,7 @@ export default function Home() {
         <header className="py-6 px-8 border-b border-slate-200 sticky top-0 z-10 bg-white/80 backdrop-blur-md">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="text-xl font-bold tracking-tight flex items-center gap-2 text-slate-900">
-              <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-slate-200 shadow-sm">
+              <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-slate-200 shadow-sm bg-slate-900 p-1">
                 <Image
                   src="/images/publiclogo.png"
                   alt="Developer"
