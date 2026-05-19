@@ -140,7 +140,7 @@ export default function Home() {
             <div className="text-xl font-bold tracking-tight flex items-center gap-2 text-slate-900">
               <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-slate-200 shadow-sm">
                 <Image
-                  src="/logo.png"
+                  src="/images/publiclogo.png"
                   alt="Developer"
                   width={32}
                   height={32}
