@@ -6,4 +6,4 @@
 - [x] Update layout.tsx body classes
 - [x] Update globals.css background overlay
 - [x] Verify with `npm run dev` (200 OK)
-- [ ] Git commit and push to Vercel
+- [x] Git commit and push to Vercel

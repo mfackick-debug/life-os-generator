@@ -119,68 +119,83 @@ export default function Home() {
   const currentQuestion = questions.find((q) => q.id === step);
 
   return (
-    <div className="min-h-screen flex flex-col font-sans transition-colors duration-300">
-      <header className="py-6 px-8 border-b border-white/10 backdrop-blur-md sticky top-0 z-10 bg-slate-950/50">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="text-xl font-bold tracking-tight flex items-center gap-2 text-white">
-            <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white shadow-md">
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
+    <div className="min-h-screen flex flex-col font-sans transition-colors duration-300 relative bg-white">
+      {/* 背景画像レイヤー（薄い透過） */}
+      <div
+        className="absolute inset-0 opacity-15 pointer-events-none"
+        style={{
+          backgroundImage: 'url("/bg.png")',
+          backgroundAttachment: "fixed",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+
+      {/* コンテンツレイヤー */}
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <header className="py-6 px-8 border-b border-slate-200 sticky top-0 z-10 bg-white/80 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <div className="text-xl font-bold tracking-tight flex items-center gap-2 text-slate-900">
+              <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white shadow-md">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              Life OS
             </div>
-            Life OS
+            <div className="text-sm font-medium text-slate-500">
+              {step === "top" && "Welcome"}
+              {step === "basic" && "Step 1 of 4"}
+              {step === "face" && "Step 2 of 4"}
+              {step === "q1" && "Step 3 of 4"}
+              {step === "q2" && "Step 4 of 4"}
+              {step === "loading" && "Analyzing..."}
+              {step === "result" && "Result"}
+            </div>
           </div>
-          <div className="text-sm font-medium text-blue-200/70">
-            {step === "top" && "Welcome"}
-            {step === "basic" && "Step 1 of 4"}
-            {step === "face" && "Step 2 of 4"}
-            {step === "q1" && "Step 3 of 4"}
-            {step === "q2" && "Step 4 of 4"}
-            {step === "loading" && "Analyzing..."}
-            {step === "result" && "Result"}
-          </div>
-        </div>
-      </header>
+        </header>
 
-      <main className="flex-grow flex flex-col justify-center py-12">
-        {step === "top" && <TopScreen onStart={() => setStep("basic")} />}
-        {step === "basic" && <BasicInfo onNext={handleBasicInfoNext} />}
-        {step === "face" && (
-          <FaceAnalysis onAnalysisComplete={handleFaceAnalysisComplete} />
-        )}
+        <main className="flex-grow flex flex-col justify-center py-12">
+          {step === "top" && <TopScreen onStart={() => setStep("basic")} />}
+          {step === "basic" && <BasicInfo onNext={handleBasicInfoNext} />}
+          {step === "face" && (
+            <FaceAnalysis onAnalysisComplete={handleFaceAnalysisComplete} />
+          )}
 
-        {currentQuestion && (
-          <QuestionScreen
-            questionNumber={parseInt(currentQuestion.id.replace("q", ""))}
-            questionText={currentQuestion.questionText}
-            choices={currentQuestion.choices}
-            selectedAnswer={answers[currentQuestion.id]}
-            onAnswer={(ans) => handleAnswer(currentQuestion.id, ans)}
-            onNext={() => handleNext(currentQuestion.id)}
-            isLast={currentQuestion.id === "q2"}
-          />
-        )}
+          {currentQuestion && (
+            <QuestionScreen
+              questionNumber={parseInt(currentQuestion.id.replace("q", ""))}
+              questionText={currentQuestion.questionText}
+              choices={currentQuestion.choices}
+              selectedAnswer={answers[currentQuestion.id]}
+              onAnswer={(ans) => handleAnswer(currentQuestion.id, ans)}
+              onNext={() => handleNext(currentQuestion.id)}
+              isLast={currentQuestion.id === "q2"}
+            />
+          )}
 
-        {step === "loading" && <LoadingScreen />}
-        {step === "result" && (
-          <ResultScreen
-            result={result}
-            error={error}
-            onRestart={() => {
-              setBasicInfo(null);
-              setFaceResult(null);
-              setAnswers({});
-              setResult("");
-              setError("");
-              setStep("top");
-            }}
-          />
-        )}
-      </main>
+          {step === "loading" && <LoadingScreen />}
+          {step === "result" && (
+            <ResultScreen
+              result={result}
+              error={error}
+              onRestart={() => {
+                setBasicInfo(null);
+                setFaceResult(null);
+                setAnswers({});
+                setResult("");
+                setError("");
+                setStep("top");
+              }}
+            />
+          )}
+        </main>
 
-      <footer className="py-8 text-center text-sm text-blue-200/50">
-        &copy; {new Date().getFullYear()} Life OS Generator. All rights reserved.
-      </footer>
+        <footer className="py-8 text-center text-sm text-slate-400">
+          &copy; {new Date().getFullYear()} Life OS Generator. All rights reserved.
+        </footer>
+      </div>
     </div>
   );
 }

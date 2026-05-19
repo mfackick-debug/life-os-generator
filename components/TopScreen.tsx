@@ -10,32 +10,36 @@ export default function TopScreen({ onStart }: TopScreenProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 text-center">
       <div className="max-w-2xl mx-auto space-y-8 animate-fade-in-up">
+        {/* 開発者の顔写真（円形・小さめ） */}
         <div className="flex justify-center">
-          <Image
-            src="/logo.png"
-            alt="Life OS Generator"
-            width={100}
-            height={100}
-            className="object-contain"
-            priority
-          />
+          <div className="w-20 h-20 rounded-full overflow-hidden shadow-sm ring-2 ring-slate-200">
+            <Image
+              src="/logo.png"
+              alt="Developer"
+              width={80}
+              height={80}
+              className="w-full h-full object-cover"
+              priority
+            />
+          </div>
         </div>
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">
+
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900">
           Life OS Generator
         </h1>
         
-        <p className="text-lg md:text-xl text-blue-300 font-semibold mt-2">
+        <p className="text-lg md:text-xl text-blue-600 font-semibold mt-2">
           あなた専用の意思決定戦略AI
         </p>
         
-        <p className="text-lg md:text-xl text-blue-100/80 max-w-xl mx-auto leading-relaxed">
-          顔写真×生年月日から、あなたの"勝ちパターン"をAIが構造化。努力を成果に直結させるための、具体的なネクストアクションを導き出します。
+        <p className="text-lg md:text-xl text-slate-600 max-w-xl mx-auto leading-relaxed">
+          顔写真×生年月日から、あなたの&ldquo;勝ちパターン&rdquo;をAIが構造化。努力を成果に直結させるための、具体的なネクストアクションを導き出します。
         </p>
 
         <div className="pt-8">
           <button
             onClick={onStart}
-            className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-foreground dark:bg-white dark:text-foreground border border-transparent rounded-full shadow-sm hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-foreground"
+            className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-slate-900 border border-transparent rounded-full shadow-sm hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
           >
             戦略OSを生成する
             <svg
@@ -53,7 +57,7 @@ export default function TopScreen({ onStart }: TopScreenProps) {
               />
             </svg>
           </button>
-          <p className="mt-4 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-4 text-xs text-slate-400">
             ※入力された生年月日や画像データは、AIによる解析にのみ一時的に使用され、サーバーやデータベースには一切保存されません。
           </p>
         </div>
