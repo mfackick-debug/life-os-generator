@@ -10,14 +10,14 @@ export default function TopScreen({ onStart }: TopScreenProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 text-center">
       <div className="max-w-2xl mx-auto space-y-8 animate-fade-in-up">
-        {/* 開発者の顔写真（円形・小さめ） */}
+        {/* 幾何学模様のサイバーロゴ（円形・小さめ） */}
         <div className="flex justify-center">
-          <div className="w-20 h-20 rounded-full overflow-hidden shadow-sm ring-2 ring-slate-200">
+          <div className="w-16 h-16 rounded-full overflow-hidden shadow-sm ring-2 ring-slate-200">
             <Image
-              src="/logo.png"
-              alt="Developer"
-              width={80}
-              height={80}
+              src="/bg.png"
+              alt="Life OS Logo"
+              width={64}
+              height={64}
               className="w-full h-full object-cover"
               priority
             />

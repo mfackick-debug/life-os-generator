@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import TopScreen from "@/components/TopScreen";
 import BasicInfo from "@/components/BasicInfo";
 import FaceAnalysis from "@/components/FaceAnalysis";
@@ -137,10 +138,14 @@ export default function Home() {
         <header className="py-6 px-8 border-b border-slate-200 sticky top-0 z-10 bg-white/80 backdrop-blur-md">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="text-xl font-bold tracking-tight flex items-center gap-2 text-slate-900">
-              <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white shadow-md">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+              <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-slate-200 shadow-sm">
+                <Image
+                  src="/logo.png"
+                  alt="Developer"
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover"
+                />
               </div>
               Life OS
             </div>
