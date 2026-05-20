@@ -11,18 +11,18 @@ export async function POST(request: NextRequest) {
   try {
     // 1. フロントエンドからデータを受け取る
     const body = await request.json();
-    const { name, dob, gender, faceAnswers } = body;
+    const { name, dob, gender, origin, faceAnswers } = body;
 
     // バリデーション
-    if (!name || !dob || !gender || !faceAnswers) {
+    if (!name || !dob || !gender || !origin || !faceAnswers) {
       return NextResponse.json(
-        { error: "必須パラメータが不足しています (name, dob, gender, faceAnswers)" },
+        { error: "必須パラメータが不足しています (name, dob, gender, origin, faceAnswers)" },
         { status: 400 }
       );
     }
 
     // 2. User プロンプトの構築
-    const userPrompt = buildUserPrompt({ name, dob, gender, faceAnswers });
+    const userPrompt = buildUserPrompt({ name, dob, gender, origin, faceAnswers });
 
     // 3. DeepSeek API を呼び出す
     const completion = await client.chat.completions.create({
@@ -47,6 +47,8 @@ export async function POST(request: NextRequest) {
 2. **姓名からの分析**: 入力された名前の漢字や響きから読み取れる、社会的な役割やエネルギーの方向性。
 3. **人相からの分析**: 輪郭（A:スマート/B:ニュートラル/C:スクエア）と目元（A:切れ長/B:丸目/C:その他）の組み合わせが示す、意思決定の癖や対人関係のスタイル。
 4. **統合診断と課題の特定**: 上記3つの要素を統合し、その人物の『最大の強み』と『矛盾から生じるボトルネック（課題）』を明確に言語化する。
+
+また、上記の分析を行う際には、入力された「出身」の国の文化的背景（東洋占術スキーム・文化的特性・統計的傾向など）を第1部の命理分析に加味して解釈すること。
 
 【第2部：最適化されたメンタルモデル（全体の30%の比重）】
 第1部の分析結果に基づき、そのユーザーの特性（強みと弱み）に最も適合するメンタルモデル（思考の枠組み）を2〜3つ提示する。
@@ -90,9 +92,10 @@ function buildUserPrompt(data: {
   name: string;
   dob: string;
   gender: string;
+  origin: string;
   faceAnswers: Record<string, string>;
 }): string {
-  const { name, dob, gender, faceAnswers } = data;
+  const { name, dob, gender, origin, faceAnswers } = data;
 
   const faceSummary = Object.entries(faceAnswers)
     .map(([key, value]) => {
@@ -111,6 +114,7 @@ function buildUserPrompt(data: {
 - 姓名: ${name}
 - 生年月日: ${dob}
 - 性別: ${gender}
+- 出身: ${origin}
 
 ## 人相の傾向
 ${faceSummary}

@@ -4,6 +4,8 @@ import { useState, useRef, useCallback } from "react";
 
 interface FaceAnalysisProps {
   onAnalysisComplete: (result: { q1: string; q2: string }) => void;
+  onSkip: () => void;
+  onBack?: () => void;
 }
 
 /**
@@ -41,7 +43,7 @@ async function analyzeFace(fileOrBlob: File | Blob): Promise<{ q1: string; q2: s
   return { q1: data.q1, q2: data.q2 };
 }
 
-export default function FaceAnalysis({ onAnalysisComplete }: FaceAnalysisProps) {
+export default function FaceAnalysis({ onAnalysisComplete, onSkip, onBack }: FaceAnalysisProps) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analyzeText, setAnalyzeText] = useState("写真をアップロードまたはカメラで撮影してください");
@@ -252,6 +254,29 @@ export default function FaceAnalysis({ onAnalysisComplete }: FaceAnalysisProps) 
                 キャンセル
               </button>
             </div>
+          )}
+
+          {/* スキップ / 手動選択へ */}
+          {!isAnalyzing && (
+            <div className="pt-2">
+              <button
+                onClick={onSkip}
+                className="w-full py-3 rounded-xl font-bold text-slate-400 dark:text-slate-500 bg-transparent border border-dashed border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-500 dark:hover:text-slate-400 transition-all duration-200"
+              >
+                写真をスキップして手動で特徴を選ぶ
+              </button>
+            </div>
+          )}
+
+          {/* 戻るボタン */}
+          {onBack && !isAnalyzing && (
+            <button
+              type="button"
+              onClick={onBack}
+              className="w-full py-3 rounded-xl font-bold text-slate-500 dark:text-slate-400 bg-transparent border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200"
+            >
+              ← 戻る
+            </button>
           )}
         </div>
       </div>

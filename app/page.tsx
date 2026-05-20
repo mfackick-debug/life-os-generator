@@ -22,6 +22,7 @@ interface BasicInfoData {
   name: string;
   dob: string;
   gender: string;
+  origin: string;
 }
 
 interface FaceAnalysisResult {
@@ -71,6 +72,11 @@ export default function Home() {
     setStep("q1");
   };
 
+  /** 顔写真スキップ → 手動選択へ */
+  const handleFaceSkip = () => {
+    setStep("q1");
+  };
+
   const handleAnswer = (questionId: string, answer: string) => {
     setAnswers((prev) => ({ ...prev, [questionId]: answer }));
   };
@@ -97,6 +103,7 @@ export default function Home() {
           name: basicInfo.name,
           dob: basicInfo.dob,
           gender: basicInfo.gender,
+          origin: basicInfo.origin,
           faceAnswers: answers,
         }),
       });
@@ -168,9 +175,18 @@ export default function Home() {
 
         <main className="flex-grow flex flex-col justify-center py-12">
           {step === "top" && <TopScreen onStart={() => setStep("basic")} />}
-          {step === "basic" && <BasicInfo onNext={handleBasicInfoNext} />}
+          {step === "basic" && (
+            <BasicInfo
+              onNext={handleBasicInfoNext}
+              initialData={basicInfo}
+            />
+          )}
           {step === "face" && (
-            <FaceAnalysis onAnalysisComplete={handleFaceAnalysisComplete} />
+            <FaceAnalysis
+              onAnalysisComplete={handleFaceAnalysisComplete}
+              onSkip={handleFaceSkip}
+              onBack={() => setStep("basic")}
+            />
           )}
 
           {currentQuestion && (
@@ -181,6 +197,13 @@ export default function Home() {
               selectedAnswer={answers[currentQuestion.id]}
               onAnswer={(ans) => handleAnswer(currentQuestion.id, ans)}
               onNext={() => handleNext(currentQuestion.id)}
+              onBack={() => {
+                if (currentQuestion.id === "q2") {
+                  setStep("q1");
+                } else if (currentQuestion.id === "q1") {
+                  setStep("face");
+                }
+              }}
               isLast={currentQuestion.id === "q2"}
             />
           )}

@@ -12,6 +12,7 @@ interface QuestionScreenProps {
   selectedAnswer?: string;
   onAnswer: (answer: string) => void;
   onNext: () => void;
+  onBack?: () => void;
   isLast: boolean;
 }
 
@@ -22,6 +23,7 @@ export default function QuestionScreen({
   selectedAnswer,
   onAnswer,
   onNext,
+  onBack,
   isLast,
 }: QuestionScreenProps) {
   return (
@@ -83,7 +85,7 @@ export default function QuestionScreen({
         </div>
 
         {/* 次へボタン */}
-        <div className="pt-8 text-center">
+        <div className="pt-8 text-center space-y-3">
           <button
             onClick={onNext}
             disabled={!selectedAnswer}
@@ -108,6 +110,16 @@ export default function QuestionScreen({
               />
             </svg>
           </button>
+
+          {onBack && (
+            <button
+              type="button"
+              onClick={onBack}
+              className="block mx-auto text-sm font-medium text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-400 transition-colors"
+            >
+              ← 戻る
+            </button>
+          )}
         </div>
       </div>
     </div>
