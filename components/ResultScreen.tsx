@@ -36,15 +36,6 @@ export default function ResultScreen({ result, error, onRestart }: ResultScreenP
   return (
     <div className="flex flex-col items-center min-h-[80vh] px-4 py-12">
       <div className="w-full max-w-3xl space-y-8 animate-fade-in-up">
-        <div className="text-center space-y-4">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-foreground">
-            Analysis Complete
-          </h2>
-          <p className="text-slate-500 dark:text-slate-400">
-            あなたに最適なメンタルモデルと人生戦略
-          </p>
-        </div>
-
         {error ? (
           /* エラー表示 */
           <div className="bg-red-50 dark:bg-red-900/20 rounded-3xl shadow-xl border border-red-200 dark:border-red-800 p-8 md:p-10">
