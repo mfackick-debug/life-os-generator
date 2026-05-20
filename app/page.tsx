@@ -67,11 +67,11 @@ export default function Home() {
 
   const handleFaceAnalysisComplete = (result: FaceAnalysisResult) => {
     setFaceResult(result);
-    // 解析結果を初期値としてanswersにセット
-    setAnswers({ q1: result.q1, q2: result.q2 });
-    // 解析成功時は手動選択画面をスキップして直接ローディングへ
+    const faceAnswers = { q1: result.q1, q2: result.q2 };
+    setAnswers(faceAnswers);
     setStep("loading");
-    generateResult();
+    // React state更新の非同期性を回避するため、解析結果を直接引数で渡す
+    generateResult(faceAnswers);
   };
 
   /** 顔写真スキップ → 手動選択へ（フォールバック） */
@@ -97,8 +97,11 @@ export default function Home() {
     }
   };
 
-  const generateResult = async () => {
+  const generateResult = async (faceAnswersOverride?: Record<string, string>) => {
     if (!basicInfo) return;
+
+    // 引数で明示的に渡された場合はそちらを優先（stale closure回避）
+    const faceAnswers = faceAnswersOverride ?? answers;
 
     setError("");
 
@@ -111,7 +114,7 @@ export default function Home() {
           dob: basicInfo.dob,
           gender: basicInfo.gender,
           origin: basicInfo.origin,
-          faceAnswers: answers,
+          faceAnswers,
         }),
       });
 
