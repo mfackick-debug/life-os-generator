@@ -69,11 +69,18 @@ export default function Home() {
     setFaceResult(result);
     // 解析結果を初期値としてanswersにセット
     setAnswers({ q1: result.q1, q2: result.q2 });
+    // 解析成功時は手動選択画面をスキップして直接ローディングへ
+    setStep("loading");
+    generateResult();
+  };
+
+  /** 顔写真スキップ → 手動選択へ（フォールバック） */
+  const handleFaceSkip = () => {
     setStep("q1");
   };
 
-  /** 顔写真スキップ → 手動選択へ */
-  const handleFaceSkip = () => {
+  /** 顔写真解析エラー → 手動選択へ（フォールバック） */
+  const handleFaceError = () => {
     setStep("q1");
   };
 
@@ -185,6 +192,7 @@ export default function Home() {
             <FaceAnalysis
               onAnalysisComplete={handleFaceAnalysisComplete}
               onSkip={handleFaceSkip}
+              onError={handleFaceError}
               onBack={() => setStep("basic")}
             />
           )}
