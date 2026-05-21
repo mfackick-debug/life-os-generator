@@ -31,7 +31,8 @@ export default function TopScreen({ onStart }: TopScreenProps) {
 
           <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight text-balance px-2 sm:px-4">
             迷いを行動に変える。<br />
-            新しい一歩を踏み出すための作戦会議。
+            新しい一歩を踏み出すための<br />
+            作戦会議。
           </h1>
           
           <p className="text-lg md:text-xl text-blue-600 font-semibold mt-2">

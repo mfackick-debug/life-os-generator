@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 
 interface FaceAnalysisProps {
-  onAnalysisComplete: (result: { q1: string; q2: string }) => void;
+  onAnalysisComplete: (result: { q1: string; q2: string; q3: string; q4: string; q5: string }) => void;
   onSkip: () => void;
   onError?: () => void;
   onBack?: () => void;
@@ -28,7 +28,7 @@ function fileToBase64(file: File): Promise<string> {
 /**
  * Gemini APIを使って顔画像を解析する
  */
-async function analyzeFace(file: File): Promise<{ q1: string; q2: string }> {
+async function analyzeFace(file: File): Promise<{ q1: string; q2: string; q3: string; q4: string; q5: string }> {
   const base64Image = await fileToBase64(file);
 
   const response = await fetch("/api/analyze-face", {
@@ -38,7 +38,7 @@ async function analyzeFace(file: File): Promise<{ q1: string; q2: string }> {
   });
 
   const data = await response.json();
-  return { q1: data.q1, q2: data.q2 };
+  return { q1: data.q1, q2: data.q2, q3: data.q3, q4: data.q4, q5: data.q5 };
 }
 
 export default function FaceAnalysis({

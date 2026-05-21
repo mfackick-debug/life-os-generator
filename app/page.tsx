@@ -28,6 +28,9 @@ interface BasicInfoData {
 interface FaceAnalysisResult {
   q1: string;
   q2: string;
+  q3: string;
+  q4: string;
+  q5: string;
 }
 
 const questions = [
@@ -67,7 +70,7 @@ export default function Home() {
 
   const handleFaceAnalysisComplete = (result: FaceAnalysisResult) => {
     setFaceResult(result);
-    const faceAnswers = { q1: result.q1, q2: result.q2 };
+    const faceAnswers = { q1: result.q1, q2: result.q2, q3: result.q3, q4: result.q4, q5: result.q5 };
     setAnswers(faceAnswers);
     setStep("loading");
     // React state更新の非同期性を回避するため、解析結果を直接引数で渡す
