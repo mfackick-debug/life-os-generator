@@ -8,32 +8,32 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Life OS Generator",
-  description: "顔写真×生年月日から、あなたの「勝ちパターン」をAIが構造化。努力を成果に直結させるための、具体的なネクストアクションを導き出します。",
+  title: "Life OS",
+  description: "顔写真と生年月日から、AIがあなた専用の意思決定戦略を導き出します。",
   icons: {
     icon: "/logo.png",
     apple: "/logo.png",
   },
   openGraph: {
-    title: "Life OS Generator",
-    description: "顔写真×生年月日から、あなたの「勝ちパターン」をAIが構造化。努力を成果に直結させるための、具体的なネクストアクションを導き出します。",
+    title: "Life OS",
+    description: "顔写真と生年月日から、AIがあなた専用の意思決定戦略を導き出します。",
     type: "website",
     locale: "ja_JP",
     url: "https://life-os-generator.vercel.app",
-    siteName: "Life OS Generator",
+    siteName: "Life OS",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Life OS Generator",
+        alt: "Life OS",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Life OS Generator",
-    description: "顔写真×生年月日から、あなたの「勝ちパターン」をAIが構造化。努力を成果に直結させるための、具体的なネクストアクションを導き出します。",
+    title: "Life OS",
+    description: "顔写真と生年月日から、AIがあなた専用の意思決定戦略を導き出します。",
     images: ["/og-image.png"],
   },
 };
